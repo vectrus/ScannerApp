@@ -183,6 +183,17 @@ async function installUpdate() {
   try {
     const result = await api.post("/api/update/install", {});
     toast(result.message || "Update wordt geïnstalleerd.", "success", 8000);
+    if (result.restart) {
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div class="restart-screen">
+            <h1>BoekScanner wordt bijgewerkt</h1>
+            <p>De app sluit nu en start daarna automatisch opnieuw.</p>
+            <p><small>Dit kan ongeveer een minuut duren.</small></p>
+          </div>
+        `;
+      }, 250);
+    }
   } catch (err) {
     els.updateBtn.disabled = false;
     els.updateBtn.innerHTML = original;

@@ -93,6 +93,38 @@ def _find_asset(release: dict[str, Any], wanted_name: str) -> Optional[UpdateAss
     return None
 
 
+def _release_from_public_web(owner: str, repo: str, asset_name: str) -> dict[str, Any]:
+    """Resolve latest public release without the GitHub API.
+
+    The GitHub API is convenient but rate-limited for anonymous users. Because
+    this app updates from a public repo with a predictable asset name, we can
+    follow the public /releases/latest redirect and use /latest/download/<asset>.
+    """
+    latest_url = f"https://github.com/{owner}/{repo}/releases/latest"
+    req = urllib.request.Request(latest_url, headers={"User-Agent": "BoekScanner-updater"})
+    with urllib.request.urlopen(req, timeout=20) as response:
+        final_url = response.geturl()
+
+    marker = "/releases/tag/"
+    if marker not in final_url:
+        raise RuntimeError("Kon laatste GitHub Release niet bepalen.")
+    tag = final_url.rsplit(marker, 1)[1].split("?", 1)[0].split("#", 1)[0]
+    asset_url = f"https://github.com/{owner}/{repo}/releases/latest/download/{asset_name}"
+    return {
+        "tag_name": tag,
+        "name": f"BoekScanner {tag}",
+        "html_url": final_url,
+        "published_at": None,
+        "assets": [
+            {
+                "name": asset_name,
+                "browser_download_url": asset_url,
+                "size": 0,
+            }
+        ],
+    }
+
+
 def check_for_update() -> UpdateCheck:
     cfg = get_config()
     updates = cfg.updates
@@ -115,15 +147,23 @@ def check_for_update() -> UpdateCheck:
     url = f"{GITHUB_API}/repos/{updates.github_owner}/{updates.github_repo}/releases/latest"
     try:
         release = _json_get(url)
-    except urllib.error.HTTPError as exc:
-        if exc.code == 404:
-            result.message = "Nog geen GitHub Release gevonden."
-        else:
-            result.message = f"GitHub gaf fout {exc.code} terug."
-        return result
     except Exception as exc:
-        result.message = f"Kan GitHub niet bereiken: {exc}"
-        return result
+        logger.info("GitHub API update-check mislukt ({}), probeer publieke release-url.", exc)
+        try:
+            release = _release_from_public_web(
+                updates.github_owner,
+                updates.github_repo,
+                updates.asset_name,
+            )
+        except urllib.error.HTTPError as web_exc:
+            if web_exc.code == 404:
+                result.message = "Nog geen GitHub Release gevonden."
+            else:
+                result.message = f"GitHub gaf fout {web_exc.code} terug."
+            return result
+        except Exception as web_exc:
+            result.message = f"Kan GitHub niet bereiken: {web_exc}"
+            return result
 
     asset = _find_asset(release, updates.asset_name)
     tag = str(release.get("tag_name") or "")
@@ -193,11 +233,17 @@ def prepare_update(zip_path: Path) -> Path:
     script_path = work_dir / "apply_update.ps1"
     target_root = app_root()
     current_pid = os.getpid()
+    is_packaged = bool(getattr(sys, "frozen", False))
+    restart_exe = str(sys.executable if is_packaged else Path(sys.executable).resolve())
+    restart_args = "" if is_packaged else " ".join(repr(arg) for arg in sys.argv)
 
     script = f"""$ErrorActionPreference = 'Stop'
 $source = {str(payload_root)!r}
 $target = {str(target_root)!r}
 $pidToWait = {current_pid}
+$restartExe = {restart_exe!r}
+$restartArgs = {restart_args!r}
+$isPackaged = ${str(is_packaged).lower()}
 
 Write-Host 'BoekScanner wordt bijgewerkt...'
 try {{
@@ -219,6 +265,8 @@ Get-ChildItem -Path $source -Force | ForEach-Object {{
 $exe = Join-Path $target 'BoekScanner.exe'
 if (Test-Path $exe) {{
   Start-Process -FilePath $exe
+}} elseif (-not $isPackaged -and (Test-Path $restartExe)) {{
+  Start-Process -FilePath $restartExe -ArgumentList $restartArgs -WorkingDirectory $target
 }}
 """
     script_path.write_text(script, encoding="utf-8")

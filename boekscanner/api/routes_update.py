@@ -35,4 +35,7 @@ def install_update() -> dict:
     # Give the HTTP response a moment to reach the browser, then exit. The
     # updater PowerShell script is already waiting for this PID to stop.
     threading.Timer(1.0, lambda: os._exit(0)).start()
-    return {"message": "Update wordt geïnstalleerd. BoekScanner start zo opnieuw."}
+    return {
+        "message": "Update wordt geïnstalleerd. BoekScanner sluit en start zo opnieuw.",
+        "restart": True,
+    }
