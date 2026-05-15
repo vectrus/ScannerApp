@@ -1,0 +1,51 @@
+{
+  "_comment": "Kopieer naar config.json en pas aan. Alles is optioneel — defaults werken meestal prima.",
+
+  "data_dir": "./data",
+  "inbox_dir": "./data/inbox",
+  "projects_dir": "./data/projects",
+
+  "tesseract": {
+    "_comment": "Pad naar tesseract.exe. Leeg laten = automatisch zoeken in PATH en standaard install-locaties.",
+    "executable": "",
+    "languages": ["nld", "eng", "deu", "fra"],
+    "_optional_languages": ["frk"],
+    "default_psm": 3
+  },
+
+  "ghostscript": {
+    "_comment": "Voor doorzoekbare PDF (ocrmypdf). Leeg = auto-detect.",
+    "executable": ""
+  },
+
+  "image_processing": {
+    "auto_deskew": true,
+    "auto_crop": true,
+    "auto_enhance_old_paper": true,
+    "two_page_split_default": false
+  },
+
+  "spellcheck": {
+    "enabled": true,
+    "language": "nl-NL"
+  },
+
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8765
+  },
+
+  "ui": {
+    "_comment": "Grote knoppen voor minder ervaren gebruikers.",
+    "large_buttons": true,
+    "show_advanced": false
+  },
+
+  "updates": {
+    "_comment": "De app gebruikt de nieuwste Release-asset BoekScanner-windows.zip.",
+    "enabled": true,
+    "github_owner": "vectrus",
+    "github_repo": "ScannerApp",
+    "asset_name": "BoekScanner-windows.zip"
+  }
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoekScanner</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <h1>📖 BoekScanner</h1>
+  </div>
+  <div class="topbar-center">
+    <select id="projectPicker" class="project-picker">
+      <option value="">— Kies een boek —</option>
+    </select>
+    <button id="newProjectBtn" class="btn btn-primary">＋ Nieuw boek</button>
+  </div>
+  <div class="topbar-right">
+    <button id="updateBtn" class="btn btn-secondary btn-update" title="Controleer op updates">
+      🔄 Update
+    </button>
+    <button id="helpBtn" class="btn btn-secondary btn-help" title="Bekijk de uitleg">
+      ❓ Hulp
+    </button>
+    <div id="statusIndicator" class="status-indicator">
+      <span class="dot dot-gray"></span>
+      <span id="statusText">Verbinden…</span>
+    </div>
+  </div>
+</header>
+
+<main id="mainGrid" class="grid">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Pagina's</h2>
+      <span id="pageCount" class="pill">0</span>
+    </div>
+
+    <div class="action-stack">
+      <button id="scanNowBtn" class="btn btn-big btn-primary" disabled title="Scan direct via Windows WIA">
+        📷 Scan nu
+      </button>
+      <button id="uploadBtn" class="btn btn-big btn-secondary" disabled title="Voeg bestaande PDF's of foto's toe">
+        📁 Bestanden toevoegen
+      </button>
+      <input id="uploadInput" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.tif,.tiff,.bmp" hidden />
+      <p class="hint">
+        💡 Tip: scans die in de map <code id="inboxPathDisplay">data/inbox</code> belanden
+        worden automatisch toegevoegd.
+      </p>
+    </div>
+
+    <ol id="pageList" class="page-list" aria-label="Lijst van pagina's"></ol>
+  </aside>
+
+  <section class="editor">
+    <div id="emptyState" class="empty-state">
+      <h2>Welkom bij BoekScanner</h2>
+      <p>Maak een nieuw boek aan of open er één om te beginnen.</p>
+      <button id="emptyNewProjectBtn" class="btn btn-big btn-primary">＋ Nieuw boek aanmaken</button>
+      <button id="emptyHelpBtn" class="btn btn-big btn-secondary">❓ Eerst de uitleg bekijken</button>
+    </div>
+
+    <div id="editorContent" class="editor-grid hidden">
+      <div class="image-pane">
+        <div class="image-toolbar">
+          <span id="pageTitle" class="page-title">Pagina —</span>
+          <div class="image-toolbar-right">
+            <button id="rotateLeftBtn" class="btn btn-ghost" title="Draai de pagina linksom en voer OCR opnieuw uit">
+              ↺ Draai links
+            </button>
+            <button id="rotateRightBtn" class="btn btn-ghost" title="Draai de pagina rechtsom en voer OCR opnieuw uit">
+              ↻ Draai rechts
+            </button>
+            <button id="splitPageBtn" class="btn btn-ghost" title="Splits deze scan handmatig in twee pagina's">
+              ↔ Splits in 2
+            </button>
+            <button id="reprocessBtn" class="btn btn-ghost" title="Opnieuw bijsnijden, rechtzetten en OCR'en">
+              🔄 Opnieuw verwerken
+            </button>
+            <button id="deletePageBtn" class="btn btn-ghost btn-danger" title="Verwijder deze pagina">
+              🗑️ Verwijder
+            </button>
+          </div>
+        </div>
+        <div class="image-viewport">
+          <img id="pageImage" alt="Pagina-scan" />
+        </div>
+      </div>
+
+      <div class="text-pane">
+        <div class="text-toolbar">
+          <span class="text-label">📝 OCR-tekst (vrij te bewerken)</span>
+          <span id="confidenceBadge" class="conf-badge">—</span>
+        </div>
+        <textarea id="ocrText" spellcheck="true" lang="nl-NL" placeholder="Nog geen tekst. Klik op 'Opnieuw verwerken' om OCR uit te voeren."></textarea>
+        <div class="text-actions">
+          <button id="saveTextBtn" class="btn btn-primary">💾 Opslaan</button>
+          <button id="checkSpellingBtn" class="btn btn-secondary">✓ Controleer spelling</button>
+          <span id="saveStatus" class="save-status"></span>
+        </div>
+        <div id="spellResults" class="spell-results hidden"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bottombar hidden" id="exportBar">
+  <div class="export-controls">
+    <span class="export-label">Maak handouts:</span>
+    <label class="check"><input type="checkbox" value="pdf" checked /> Doorzoekbare PDF</label>
+    <label class="check"><input type="checkbox" value="docx" checked /> Word (.docx)</label>
+    <label class="check"><input type="checkbox" value="txt" /> Platte tekst</label>
+    <label class="check"><input type="checkbox" value="md" /> Markdown</label>
+    <span class="sep">|</span>
+    <label class="check"><input type="checkbox" id="cbCombined" checked /> Eén bestand met alle pagina's</label>
+    <label class="check"><input type="checkbox" id="cbPerPage" checked /> Ook per pagina</label>
+  </div>
+  <button id="exportBtn" class="btn btn-big btn-primary">📤 Maak handouts</button>
+</footer>
+
+<!-- Welkom-popup voor de allereerste keer -->
+<dialog id="welcomeDialog" class="modal modal-welcome">
+  <div class="welcome-body">
+    <h2>👋 Welkom bij BoekScanner!</h2>
+    <p class="welcome-lead">
+      Met deze app maakt u eenvoudig <strong>handouts</strong> uit
+      gescande boeken. Geen ervaring met computers nodig — wij leggen
+      u alles uit.
+    </p>
+    <p class="welcome-question">Wat wilt u nu doen?</p>
+    <div class="welcome-actions">
+      <button id="welcomeReadHelp" class="btn btn-big btn-primary">
+        📖 Eerst de uitleg lezen
+        <small>Aanbevolen als u de app voor het eerst gebruikt</small>
+      </button>
+      <button id="welcomeStart" class="btn btn-big btn-secondary">
+        🚀 Direct beginnen
+        <small>Ik weet hoe het werkt</small>
+      </button>
+    </div>
+    <label class="welcome-dontshow">
+      <input type="checkbox" id="welcomeDontShow" />
+      Toon dit welkom-scherm niet meer
+    </label>
+  </div>
+</dialog>
+
+<!-- Hulp-dialoog (volledig scherm) -->
+<dialog id="helpDialog" class="modal modal-help" aria-label="Hulp en uitleg">
+  <div class="help-header">
+    <h2>❓ Hulp en uitleg</h2>
+    <div class="help-header-actions">
+      <button id="helpPrintBtn" class="btn btn-secondary" title="Print de hulp">
+        🖨️ Afdrukken
+      </button>
+      <button id="helpCloseBtn" class="btn btn-primary" title="Sluit de hulp (of druk Esc)">
+        ✕ Sluiten
+      </button>
+    </div>
+  </div>
+  <div id="helpBody" class="help-body">
+    <p class="help-loading">Hulp laden…</p>
+  </div>
+</dialog>
+
+<!-- Modale dialoog: nieuw boek -->
+<dialog id="newProjectDialog" class="modal">
+  <form id="newProjectForm" method="dialog">
+    <h2>Nieuw boek</h2>
+    <label>
+      <span>Naam van het boek</span>
+      <input type="text" id="newProjectName" required maxlength="120" placeholder="Bijv. Geschiedenis van Nederland" />
+    </label>
+    <label>
+      <span>Korte beschrijving (optioneel)</span>
+      <textarea id="newProjectDesc" rows="3" placeholder="Bijv. Cursusboek hoofdstuk 1-5"></textarea>
+    </label>
+    <div class="modal-actions">
+      <button type="button" id="cancelNewProject" class="btn btn-secondary">Annuleren</button>
+      <button type="submit" class="btn btn-primary">Aanmaken</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Toast meldingen -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" font-family="Segoe UI, Arial, sans-serif">
+  <title>NAPS2 - Auto Save Settings</title>
+  <desc>Het Auto Save Settings dialoogvenster van NAPS2 met de juiste vinkjes en de Output Path gemarkeerd.</desc>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M 0,0 L 6,3 L 0,6 Z" fill="#d4380d"/>
+    </marker>
+    <symbol id="checkbox-on" viewBox="0 0 18 18">
+      <rect x="0.5" y="0.5" width="17" height="17" fill="#d4380d"/>
+      <polyline points="3.5,9 7.5,13 14.5,5" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="checkbox-off" viewBox="0 0 18 18">
+      <rect x="0.5" y="0.5" width="17" height="17" fill="#fff" stroke="#888"/>
+    </symbol>
+    <symbol id="dropdownarrow" viewBox="0 0 12 12">
+      <polygon points="2,4 10,4 6,9" fill="#444"/>
+    </symbol>
+  </defs>
+
+  <!-- Window shadow -->
+  <rect x="20" y="20" width="680" height="480" rx="6" fill="#000" opacity="0.12"/>
+  <!-- Window -->
+  <rect x="16" y="16" width="680" height="480" rx="6" fill="#f3f3f3" stroke="#9aa0a6"/>
+
+  <!-- Title bar -->
+  <rect x="16" y="16" width="680" height="32" rx="6" fill="#1f7a4d"/>
+  <rect x="16" y="40" width="680" height="8" fill="#1f7a4d"/>
+  <text x="36" y="37" font-size="14" fill="#fff" font-weight="600">Auto Save Settings</text>
+  <line x1="668" y1="26" x2="680" y2="38" stroke="#fff" stroke-width="2"/>
+  <line x1="680" y1="26" x2="668" y2="38" stroke="#fff" stroke-width="2"/>
+
+  <!-- Enable Auto Save - HIGHLIGHTED -->
+  <rect x="36" y="64" width="640" height="44" rx="6" fill="#fffbe6" stroke="#d4380d" stroke-width="2"/>
+  <use href="#checkbox-on" x="50" y="78" width="18" height="18"/>
+  <text x="80" y="92" font-size="14" fill="#222" font-weight="700">Enable Auto Save</text>
+  <text x="80" y="102" font-size="11" fill="#666">Sla scans automatisch op (zonder elke keer een dialoog)</text>
+
+  <!-- Output Path - HIGHLIGHTED -->
+  <text x="36" y="138" font-size="13" font-weight="700" fill="#222">Output Path:</text>
+  <rect x="36" y="146" width="552" height="28" fill="#fff" stroke="#d4380d" stroke-width="2"/>
+  <text x="48" y="165" font-size="12" fill="#222">C:\BoekScanner\data\inbox</text>
+  <rect x="592" y="146" width="84" height="28" fill="#f3f3f3" stroke="#d4380d" stroke-width="2"/>
+  <text x="634" y="165" text-anchor="middle" font-size="12" fill="#222">Browse...</text>
+
+  <text x="36" y="194" font-size="11" fill="#666">Pad naar de Scan inbox van BoekScanner. Kopieer dit pad uit de app.</text>
+
+  <!-- File Type -->
+  <text x="36" y="234" font-size="13" font-weight="700" fill="#222">File Type:</text>
+  <rect x="36" y="242" width="280" height="28" fill="#fff" stroke="#a8a8a8"/>
+  <text x="48" y="261" font-size="12" font-weight="700">PNG (.png)</text>
+  <use href="#dropdownarrow" x="290" y="248" width="16" height="16"/>
+
+  <!-- Separator option - HIGHLIGHTED -->
+  <rect x="36" y="290" width="640" height="40" rx="6" fill="#fffbe6" stroke="#d4380d" stroke-width="2"/>
+  <use href="#checkbox-on" x="50" y="304" width="18" height="18"/>
+  <text x="80" y="318" font-size="14" fill="#222" font-weight="700">Save each page as a separate file</text>
+
+  <!-- Other options (unchecked) -->
+  <use href="#checkbox-off" x="50" y="354" width="18" height="18"/>
+  <text x="80" y="368" font-size="13" fill="#222">Prompt before overwriting files</text>
+
+  <use href="#checkbox-off" x="50" y="380" width="18" height="18"/>
+  <text x="80" y="394" font-size="13" fill="#222">Clear images after saving</text>
+
+  <use href="#checkbox-off" x="50" y="406" width="18" height="18"/>
+  <text x="80" y="420" font-size="13" fill="#222">Keep filename pattern between sessions</text>
+
+  <!-- OK / Cancel buttons -->
+  <rect x="460" y="450" width="100" height="30" fill="#1f7a4d" stroke="#1f7a4d"/>
+  <text x="510" y="470" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">OK</text>
+  <rect x="570" y="450" width="100" height="30" fill="#fff" stroke="#a8a8a8"/>
+  <text x="620" y="470" font-size="13" fill="#222" text-anchor="middle">Cancel</text>
+</svg>
