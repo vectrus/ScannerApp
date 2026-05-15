@@ -1,0 +1,572 @@
+<!--
+  Hulp-pagina voor BoekScanner.
+  Wordt geladen door app.js en in een dialog getoond.
+  Geen <html>/<body> tags hier — dit is een fragment.
+-->
+<div class="help-root">
+
+  <nav class="help-toc" aria-label="Inhoudsopgave">
+    <h3>📚 Inhoud</h3>
+    <ol>
+      <li><a href="#h-welkom">Welkom</a></li>
+      <li><a href="#h-eerste-keer">De allereerste keer</a></li>
+      <li><a href="#h-scanner">Mijn scanner instellen</a>
+        <ul>
+          <li><a href="#h-ts5150">Canon PIXMA TS5150</a></li>
+          <li><a href="#h-ts3350">Canon PIXMA TS3350</a></li>
+          <li><a href="#h-naps2">Eenvoudig alternatief: NAPS2</a></li>
+        </ul>
+      </li>
+      <li><a href="#h-scannen">Een boek scannen</a></li>
+      <li><a href="#h-bewerken">Tekst bewerken</a></li>
+      <li><a href="#h-exporteren">Handouts maken</a></li>
+      <li><a href="#h-tips">Tips voor oude boeken</a></li>
+      <li><a href="#h-problemen">Hulp! Het werkt niet</a></li>
+      <li><a href="#h-uitleg">Wat doet deze app eigenlijk?</a></li>
+    </ol>
+  </nav>
+
+  <article class="help-content">
+
+    <!-- ==================== Welkom ==================== -->
+    <section id="h-welkom">
+      <h1>👋 Welkom bij BoekScanner</h1>
+      <p class="lead">
+        Met deze app kunt u eenvoudig een boek inscannen en er
+        <strong>handouts</strong> van maken voor een cursus. De app maakt
+        van de scans automatisch <strong>bewerkbare tekst</strong> én
+        <strong>nette PDF- of Word-bestanden</strong>.
+      </p>
+      <p>
+        Geen zorgen als u niet veel weet van computers — alles wat u nodig
+        heeft staat in deze handleiding. Volg de stappen één voor één en
+        u komt er.
+      </p>
+      <div class="callout callout-info">
+        <strong>💡 Tip:</strong> u kunt deze hulp altijd terugvinden via de knop
+        <kbd>❓ Hulp</kbd> rechtsboven in de app.
+      </div>
+    </section>
+
+    <!-- ==================== Eerste keer ==================== -->
+    <section id="h-eerste-keer">
+      <h1>📦 De allereerste keer</h1>
+      <p>
+        Voordat u kunt beginnen, moet de computer eenmalig een paar
+        kleine programma's installeren die nodig zijn voor het herkennen
+        van tekst (OCR genoemd) en het maken van PDF-bestanden.
+      </p>
+
+      <h2>Stap 1 — De installatie uitvoeren</h2>
+      <ol class="steps">
+        <li>
+          <p>Open de map waar BoekScanner staat (meestal op het bureaublad
+          of in <code>Documenten</code>).</p>
+        </li>
+        <li>
+          <p>Open de map <code>installer</code>.</p>
+        </li>
+        <li>
+          <p>Klik met de <strong>rechtermuisknop</strong> op het bestand
+          <code>install_dependencies.ps1</code>.</p>
+        </li>
+        <li>
+          <p>Kies <strong>Uitvoeren met PowerShell</strong>. Krijgt u de
+          vraag of dit script veilig is? Klik op <strong>Ja</strong>.</p>
+          <div class="callout callout-warning">
+            <strong>⚠ Let op:</strong> de installatie duurt ongeveer
+            <strong>5 tot 10 minuten</strong>. Er gebeurt veel op het
+            scherm — dat hoort zo. Wacht totdat u onderaan
+            "<em>Klaar!</em>" ziet staan.
+          </div>
+        </li>
+      </ol>
+
+      <h2>Stap 2 — Controleren of alles goed is</h2>
+      <ol class="steps">
+        <li>Start BoekScanner door dubbel te klikken op
+          <code>BoekScanner.exe</code>.</li>
+        <li>Kijk rechtsboven in de app:
+          <ul>
+            <li>🟢 <strong>"Tesseract … (4 talen)"</strong> = alles goed!</li>
+            <li>🔴 <strong>"Tesseract niet gevonden"</strong> = de installatie is
+              niet helemaal gelukt. Probeer Stap 1 opnieuw, en doe nu
+              een rechtermuisklik en kies <em>Als administrator uitvoeren</em>.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ==================== Scanner instellen ==================== -->
+    <section id="h-scanner">
+      <h1>🖨️ Mijn scanner instellen</h1>
+      <p class="lead">
+        Kies hieronder welke printer/scanner u heeft. Volg dan de stappen.
+        U hoeft dit maar <strong>één keer</strong> te doen.
+      </p>
+
+      <!-- ----------- TS5150 ----------- -->
+      <section id="h-ts5150" class="model-block">
+        <h2>Canon PIXMA TS5150 <span class="badge">Met klein scherm</span></h2>
+        <p>De TS5150 herkent u aan het kleine kleuren-LCD-schermpje aan
+        de voorkant. Dit model kan via USB-kabel of via wifi werken.</p>
+
+        <h3>A. Scanner aansluiten op de computer</h3>
+        <ol class="steps">
+          <li>Sluit de stekker aan en zet de printer aan met de
+            <strong>AAN/UIT</strong>-knop.</li>
+          <li>Open in een internetbrowser (bijv. Edge of Chrome) de pagina
+            <a href="https://canon.com/ijsetup" target="_blank">canon.com/ijsetup</a>
+            en typ daar in: <strong>TS5150</strong>.</li>
+          <li>Klik op <strong>Download</strong> en daarna op het gedownloade
+            bestand om Canon's installatieprogramma te starten.</li>
+          <li>Volg de stappen op het scherm. Bij de vraag
+            "<em>Welke verbinding?</em>" kunt u kiezen voor <strong>USB</strong>
+            (kabel) of <strong>Wifi</strong> (draadloos). USB is het
+            eenvoudigst — er zit een meegeleverde USB-kabel in de doos.</li>
+          <li>Vink bij de optie-keuze <strong>"IJ Scan Utility"</strong>
+            aan. Dat heeft u zo nodig om te kunnen scannen.</li>
+        </ol>
+
+        <h3>B. IJ Scan Utility koppelen aan BoekScanner</h3>
+        <p>BoekScanner heeft een speciale map waar nieuwe scans automatisch
+        in terechtkomen. Die map heet de <strong>"Scan inbox"</strong>.
+        Het pad ervan ziet u rechtsonder in de app, naast 💡 Tip.</p>
+
+        <ol class="steps">
+          <li>Open <strong>IJ Scan Utility</strong> via Start-menu →
+            <em>Canon Utilities</em> → <em>IJ Scan Utility</em>.</li>
+          <li>Klik onderin op <strong>Settings…</strong> (Instellingen).</li>
+          <li>Klik in de linkerbalk op <strong>Document Scan</strong>
+            (Document scannen).</li>
+          <li>Bij <strong>Save in</strong> (Opslaan in) klikt u op het
+            mapje-knopje en kiest u de <strong>Scan inbox</strong> van
+            BoekScanner.
+            <div class="callout callout-info">
+              💡 Het pad staat onder in de zijbalk van BoekScanner. Klik
+              op het pad om het te kopiëren, en plak het in het mapje-veld.
+            </div>
+          </li>
+          <li>Bij <strong>Data Format</strong> (Bestandstype) kiest u
+            <strong>PNG</strong> of <strong>JPEG</strong>.</li>
+          <li>Bij <strong>Resolution</strong> (Resolutie) kiest u
+            <strong>300 dpi</strong> — dat is de beste kwaliteit voor OCR.</li>
+          <li>Klik <strong>OK</strong>.</li>
+        </ol>
+
+        <figure class="help-figure">
+          <img src="/static/img/scan-utility-settings.svg" alt="IJ Scan Utility Settings dialoog met de Save in optie gemarkeerd" loading="lazy" />
+          <figcaption>Het Settings-venster van IJ Scan Utility. Vul bij <strong>Save in</strong> het pad in van de Scan inbox van BoekScanner.</figcaption>
+        </figure>
+
+        <h3>C. Scannen vanaf nu</h3>
+        <ol class="steps">
+          <li>Leg de pagina met de tekst <strong>naar beneden</strong> op het
+            scannerglas, in de hoek met het pijltje.
+
+            <figure class="help-figure">
+              <img src="/static/img/book-on-scanner.svg" alt="Bovenaanzicht: pagina ligt met tekst naar beneden in de linkerbovenhoek van het scannerglas" loading="lazy" />
+              <figcaption>Zo legt u een pagina goed: tekst naar beneden, in de hoek met het pijltje (linksboven).</figcaption>
+            </figure>
+          </li>
+          <li>Sluit het deksel.</li>
+          <li>Open IJ Scan Utility en klik op <strong>Document</strong>.
+
+            <figure class="help-figure">
+              <img src="/static/img/scan-utility-main.svg" alt="IJ Scan Utility hoofdvenster met de Document-knop gemarkeerd" loading="lazy" />
+              <figcaption>Klik op de grote <strong>Document</strong>-knop om te scannen.</figcaption>
+            </figure>
+          </li>
+          <li>De pagina wordt gescand en verschijnt automatisch als
+            nieuwe pagina in BoekScanner. ✓</li>
+        </ol>
+
+        <div class="callout callout-success">
+          <strong>🎉 Klaar:</strong> herhaal stap 1-3 voor elke pagina.
+          De volgorde van pagina's kunt u later in BoekScanner aanpassen.
+        </div>
+      </section>
+
+      <!-- ----------- TS3350 ----------- -->
+      <section id="h-ts3350" class="model-block">
+        <h2>Canon PIXMA TS3350 <span class="badge">Zonder scherm</span></h2>
+        <p>De TS3350 heeft <strong>geen schermpje</strong> — alleen wat
+        kleine knopjes met lampjes. Daarom gaat scannen <strong>altijd
+        via de computer</strong>, niet via de printer zelf.</p>
+
+        <h3>A. Scanner aansluiten op de computer</h3>
+        <ol class="steps">
+          <li>Sluit de stekker aan en zet de printer aan.</li>
+          <li>Sluit de printer met een <strong>USB-kabel</strong> aan op
+            de computer (een USB-kabel is meestal niet meegeleverd —
+            een gewone "USB-A naar USB-B" kabel werkt).
+            <div class="callout callout-info">
+              💡 Werkt USB niet? Dan kunt u ook wifi gebruiken. Druk op
+              de <strong>knop met het wifi-symbool</strong> en houd vast
+              tot het oranje lampje knippert. Volg dan de wifi-instructies
+              op het Canon-installatieprogramma.
+            </div>
+          </li>
+          <li>Open in een internetbrowser de pagina
+            <a href="https://canon.com/ijsetup" target="_blank">canon.com/ijsetup</a>
+            en typ daar in: <strong>TS3350</strong>.</li>
+          <li>Klik op <strong>Download</strong> en open het gedownloade
+            bestand. Volg de stappen op het scherm.</li>
+          <li>Vink bij de optie-keuze <strong>"IJ Scan Utility"</strong>
+            aan. Dat heeft u nodig om te kunnen scannen.</li>
+        </ol>
+
+        <h3>B. IJ Scan Utility koppelen aan BoekScanner</h3>
+        <ol class="steps">
+          <li>Open <strong>IJ Scan Utility</strong> via Start-menu →
+            <em>Canon Utilities</em> → <em>IJ Scan Utility</em>.</li>
+          <li>Klik onderin op <strong>Settings…</strong> (Instellingen).</li>
+          <li>Klik in de linkerbalk op <strong>Auto Scan</strong>.</li>
+          <li>Bij <strong>Save in</strong> (Opslaan in) klikt u op het
+            mapje-knopje en kiest u de <strong>Scan inbox</strong>
+            van BoekScanner. Het pad ziet u rechtsonder in BoekScanner.</li>
+          <li>Bij <strong>Data Format</strong> kiest u <strong>PNG</strong>.</li>
+          <li>Bij <strong>Resolution</strong> kiest u <strong>300 dpi</strong>.</li>
+          <li>Klik op <strong>OK</strong>.</li>
+        </ol>
+
+        <figure class="help-figure">
+          <img src="/static/img/scan-utility-settings.svg" alt="IJ Scan Utility Settings dialoog met de Save in optie gemarkeerd" loading="lazy" />
+          <figcaption>Het Settings-venster ziet er bij de TS3350 hetzelfde uit. Kies bij <strong>Save in</strong> de Scan inbox van BoekScanner.</figcaption>
+        </figure>
+
+        <h3>C. Scannen vanaf nu</h3>
+        <ol class="steps">
+          <li>Leg de pagina met de tekst <strong>naar beneden</strong> op
+            het scannerglas, in de hoek met het pijltje.
+
+            <figure class="help-figure">
+              <img src="/static/img/book-on-scanner.svg" alt="Bovenaanzicht: pagina ligt met tekst naar beneden in de hoek met het pijltje" loading="lazy" />
+              <figcaption>Zo legt u een pagina goed: tekst naar beneden, in de hoek met het pijltje.</figcaption>
+            </figure>
+          </li>
+          <li>Sluit het deksel.</li>
+          <li>Open IJ Scan Utility op de computer en klik op
+            <strong>Auto</strong>.</li>
+          <li>De pagina wordt gescand en verschijnt automatisch in
+            BoekScanner. ✓</li>
+        </ol>
+
+        <div class="callout callout-warning">
+          <strong>⚠ Niet vanaf de printer scannen:</strong> bij dit model
+          heeft de "Scan"-knop op de printer geen effect omdat er geen
+          scherm is om de bestemming te kiezen. Altijd vanaf de computer
+          starten.
+        </div>
+      </section>
+
+      <!-- ----------- NAPS2 ----------- -->
+      <section id="h-naps2" class="model-block">
+        <h2>💚 Eenvoudig alternatief: NAPS2</h2>
+        <p>
+          Als IJ Scan Utility ingewikkeld is, kunt u in plaats daarvan
+          <strong>NAPS2</strong> gebruiken. Dat is een gratis programma met
+          een hele grote groene <strong>Scan</strong>-knop. Werkt met beide
+          Canon-modellen en is makkelijker te gebruiken.
+        </p>
+
+        <h3>NAPS2 installeren</h3>
+        <ol class="steps">
+          <li>Ga naar <a href="https://www.naps2.com/" target="_blank">www.naps2.com</a>.</li>
+          <li>Klik op <strong>Download</strong> en kies de Windows
+            installer (<code>.exe</code>).</li>
+          <li>Open het gedownloade bestand en klik telkens op
+            <strong>Next</strong> en <strong>Install</strong>.</li>
+        </ol>
+
+        <h3>NAPS2 instellen voor BoekScanner</h3>
+        <ol class="steps">
+          <li>Open <strong>NAPS2</strong>.</li>
+          <li>Klik op <strong>Profiles</strong> (Profielen) bovenaan, en
+            dan op <strong>New</strong> (Nieuw).</li>
+          <li>Kies bij <strong>Device</strong> uw Canon-printer
+            (TS5150 of TS3350).</li>
+          <li>Stel <strong>Resolution: 300 dpi</strong> in en
+            <strong>Color: Color</strong>.</li>
+          <li>Klik op <strong>OK</strong>.</li>
+          <li>Ga nu naar het menu <strong>Tools → Auto Save Settings</strong>.
+            Vink <strong>Enable Auto Save</strong> aan.
+
+            <figure class="help-figure">
+              <img src="/static/img/naps2-autosave.svg" alt="NAPS2 Auto Save Settings dialoog met Enable Auto Save aangevinkt en het pad naar Scan inbox ingevuld" loading="lazy" />
+              <figcaption>Het Auto Save Settings-venster van NAPS2. Vink "Enable Auto Save" en "Save each page as a separate file" aan.</figcaption>
+            </figure>
+          </li>
+          <li>Bij <strong>Output Path</strong> kiest u de <strong>Scan
+            inbox</strong> van BoekScanner (pad rechtsonder in BoekScanner).</li>
+          <li>Bij <strong>File type</strong> kiest u <strong>PNG</strong>
+            of <strong>JPEG</strong>.</li>
+          <li>Vink ook aan: <strong>Save each page as a separate file</strong>.</li>
+          <li>Klik op <strong>OK</strong>.</li>
+        </ol>
+
+        <h3>Scannen vanaf nu</h3>
+        <p>Leg een pagina op de scanner en klik op de grote groene
+          <strong>Scan</strong>-knop in NAPS2. De pagina komt vanzelf in
+          BoekScanner terecht.</p>
+
+        <figure class="help-figure">
+          <img src="/static/img/naps2-main.svg" alt="NAPS2 hoofdvenster met de grote groene Scan-knop aangeduid" loading="lazy" />
+          <figcaption>De grote groene <strong>Scan</strong>-knop links boven is alles wat u nodig heeft om een pagina te scannen.</figcaption>
+        </figure>
+      </section>
+    </section>
+
+    <!-- ==================== Boek scannen ==================== -->
+    <section id="h-scannen">
+      <h1>📷 Een boek scannen</h1>
+
+      <h2>Stap 1 — Een nieuw "boek" aanmaken in BoekScanner</h2>
+      <ol class="steps">
+        <li>Klik bovenin op <kbd>＋ Nieuw boek</kbd>.</li>
+        <li>Geef het boek een naam, bijvoorbeeld
+          <em>"Geschiedenis hoofdstuk 3"</em>.</li>
+        <li>Klik op <strong>Aanmaken</strong>.</li>
+      </ol>
+      <p>Vanaf nu komt elke scan in dít boek terecht. U kunt later
+        meerdere boeken naast elkaar hebben en wisselen via het keuzemenu
+        bovenin.</p>
+
+      <h2>Stap 2 — Pagina's scannen</h2>
+      <p>Drie manieren om een pagina toe te voegen:</p>
+      <ul class="big-list">
+        <li>
+          <strong>Met IJ Scan Utility of NAPS2</strong> (zie hoofdstuk
+          <a href="#h-scanner">Mijn scanner instellen</a>): scan via de
+          computer en de pagina komt automatisch in BoekScanner. ⭐ Aanbevolen.
+        </li>
+        <li>
+          <strong>Met de knop 📷 Scan nu</strong> in BoekScanner zelf —
+          werkt alleen als uw scanner direct door Windows herkend wordt.
+          Probeer het gerust; lukt het niet, gebruik dan IJ Scan Utility.
+        </li>
+        <li>
+          <strong>Bestaande PDF/foto's toevoegen</strong>: sleep ze vanuit
+          Verkenner direct in het venster van BoekScanner, of klik op
+          <kbd>📁 Bestanden toevoegen</kbd>.
+        </li>
+      </ul>
+
+      <h2>Stap 3 — Pagina-volgorde controleren</h2>
+      <p>In de zijbalk links ziet u alle pagina's met kleine voorbeelden.
+        Klopt de volgorde niet? Sleep een pagina-tegel naar boven of
+        beneden om hem te verplaatsen.</p>
+    </section>
+
+    <!-- ==================== Bewerken ==================== -->
+    <section id="h-bewerken">
+      <h1>✏️ Tekst bewerken</h1>
+      <p>Wanneer u op een pagina klikt, ziet u twee dingen:</p>
+      <ul class="big-list">
+        <li><strong>Links</strong>: de gescande pagina (zo'n stukje boek).</li>
+        <li><strong>Rechts</strong>: de tekst die de computer heeft
+          herkend. <strong>Deze tekst kunt u zelf wijzigen.</strong></li>
+      </ul>
+
+      <h2>Wat doet welke knop?</h2>
+      <dl class="defs">
+        <dt>💾 Opslaan</dt>
+        <dd>Slaat uw wijzigingen op. Wijzigingen worden ook automatisch
+          opgeslagen 1 seconde nadat u ophoudt met typen.</dd>
+
+        <dt>✓ Controleer spelling</dt>
+        <dd>Geeft een lijst met mogelijk verkeerd gespelde woorden, met
+          suggesties.</dd>
+
+        <dt>🔄 Opnieuw verwerken</dt>
+        <dd>Doet de bewerking en tekstherkenning opnieuw. Handig als de
+          eerste keer niet zo mooi was.</dd>
+
+        <dt>🗑️ Verwijder</dt>
+        <dd>Haalt deze pagina permanent weg uit het boek.</dd>
+      </dl>
+
+      <h2>Wat betekent het percentage?</h2>
+      <p>Bovenaan de tekst ziet u "OCR-zekerheid: 87%" of vergelijkbaar.
+        Dit is hoe zeker de computer is dat hij de tekst goed gelezen heeft.</p>
+      <ul class="big-list">
+        <li>🟢 <strong>85% of hoger</strong>: bijna zeker correct.</li>
+        <li>🟠 <strong>70% – 85%</strong>: even nakijken kan geen kwaad.</li>
+        <li>🔴 <strong>onder 70%</strong>: grote kans op fouten — controleer
+          de tekst, of scan de pagina opnieuw met betere belichting.</li>
+      </ul>
+    </section>
+
+    <!-- ==================== Exporteren ==================== -->
+    <section id="h-exporteren">
+      <h1>📄 Handouts maken</h1>
+      <p>Onderin de app staat de export-balk. Hier maakt u van uw
+        ingescande boek bruikbare bestanden voor uw cursus.</p>
+
+      <h2>Welke formaten kies ik?</h2>
+      <dl class="defs">
+        <dt>📕 Doorzoekbare PDF</dt>
+        <dd>De pagina's blijven er precies hetzelfde uitzien als in het
+          boek, maar u kunt erin <strong>zoeken</strong> en
+          <strong>kopiëren</strong>. Beste keuze als u digitale
+          handouts wilt versturen.</dd>
+
+        <dt>📘 Word (.docx)</dt>
+        <dd>Een Word-document met afbeeldingen én tekst.
+          <strong>Open in Word om verder te bewerken</strong>: stukken
+          weghalen, opmaak aanpassen, eigen tekst toevoegen, enzovoort.
+          ⭐ Aanbevolen voor cursus-handouts.</dd>
+
+        <dt>📄 Platte tekst</dt>
+        <dd>Alleen de tekst, zonder opmaak. Compact en makkelijk te
+          plakken in andere programma's.</dd>
+
+        <dt>📝 Markdown</dt>
+        <dd>Voor wie van eenvoudige opmaak houdt of met websites werkt.
+          Een leek heeft dit zelden nodig.</dd>
+      </dl>
+
+      <h2>Eén bestand of per pagina?</h2>
+      <ul class="big-list">
+        <li><strong>Eén bestand met alle pagina's</strong>: alles
+          achter elkaar. Handig voor één lange handout.</li>
+        <li><strong>Ook per pagina</strong>: elk bladzijde apart. Handig
+          als u losse stukken wilt uitprinten.</li>
+      </ul>
+
+      <h2>Hoe?</h2>
+      <ol class="steps">
+        <li>Vink onderaan aan welke formaten u wilt.</li>
+        <li>Vink aan of u één gecombineerd bestand of per pagina wilt
+          (mag allebei).</li>
+        <li>Klik op <kbd>📤 Maak handouts</kbd>.</li>
+        <li>Even geduld — vooral PDF kost wat tijd. Daarna verschijnt er
+          rechtsonder een melding met <strong>links naar de bestanden</strong>.
+          Klik op een link om te openen of op te slaan.</li>
+      </ol>
+    </section>
+
+    <!-- ==================== Tips voor oude boeken ==================== -->
+    <section id="h-tips">
+      <h1>📜 Tips voor oude boeken</h1>
+      <ul class="big-list">
+        <li><strong>Vergeeld papier</strong>: BoekScanner past automatisch
+          contrast en helderheid aan. Doet de tekst er nog steeds te
+          flets uit? Klik op <kbd>🔄 Opnieuw verwerken</kbd>.</li>
+        <li><strong>Twee pagina's tegelijk gescand</strong> (opengeslagen
+          boek): bij een nieuw boek kunt u in de instellingen
+          <strong>"Twee-pagina splitter"</strong> aanvinken — dan worden
+          de twee pagina's automatisch uit elkaar gehaald.</li>
+        <li><strong>Krom en scheef</strong>: BoekScanner zet scans
+          automatisch recht. Hoort u rare hoeken? Leg de pagina rechter
+          op de scanner.</li>
+        <li><strong>Gotische letter</strong> (oude Duitse drukletter,
+          ziet er bijna zwart-en-puntig uit): laat iemand één keer
+          uitvoeren:
+          <code>installer\install_dependencies.ps1 -ExtraLanguages frk</code>
+          en vink "frk" aan in de instellingen.</li>
+        <li><strong>Hele oude boekjes met dunne pagina's</strong>: scan
+          met een <strong>donker stuk papier achter</strong> de pagina.
+          Anders ziet u de tekst van de andere kant erdoor heen.</li>
+      </ul>
+    </section>
+
+    <!-- ==================== Probleemoplossing ==================== -->
+    <section id="h-problemen">
+      <h1>🆘 Hulp! Het werkt niet</h1>
+
+      <details open>
+        <summary><strong>Rechtsboven staat "Tesseract niet gevonden" 🔴</strong></summary>
+        <p>De installatie is niet (helemaal) gelukt. Voer
+          <code>installer\install_dependencies.ps1</code> opnieuw uit met
+          rechtermuisklik → <strong>Als administrator uitvoeren</strong>.
+          Sluit BoekScanner en open hem daarna opnieuw.</p>
+      </details>
+
+      <details>
+        <summary><strong>De knop "📷 Scan nu" doet niets</strong></summary>
+        <p>Uw Canon ondersteunt geen directe Windows-aansturing (WIA).
+          Geen probleem: gebruik <strong>IJ Scan Utility</strong> of
+          <strong>NAPS2</strong> (zie hoofdstuk
+          <a href="#h-scanner">Mijn scanner instellen</a>). Scans die
+          daar in de Scan inbox-map terechtkomen, verschijnen
+          automatisch in BoekScanner.</p>
+      </details>
+
+      <details>
+        <summary><strong>Mijn scan komt niet automatisch in BoekScanner</strong></summary>
+        <ol class="steps">
+          <li>Controleer of het scan-programma écht naar de juiste
+            <strong>Scan inbox</strong>-map opslaat. Het pad ziet u
+            rechtsonder in BoekScanner.</li>
+          <li>Heeft u een <strong>boek geopend</strong> in BoekScanner?
+            (Bovenin staat de naam, anders staat er "— Kies een boek —".)
+            Maak eerst een boek aan.</li>
+          <li>Wacht 5 seconden — bij grote scans kan het even duren.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><strong>De tekst is helemaal verkeerd herkend</strong></summary>
+        <ol class="steps">
+          <li>Scan met een hogere resolutie: <strong>300 dpi</strong> is
+            ideaal, niet meer.</li>
+          <li>Zorg dat de pagina recht en plat op de scanner ligt
+            (deksel goed dicht).</li>
+          <li>Klik op <kbd>🔄 Opnieuw verwerken</kbd>.</li>
+          <li>Helpt dat niet? Pas de tekst handmatig aan in het
+            tekstvak rechts — uw aanpassingen blijven bewaard.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><strong>Doorzoekbare PDF lukt niet</strong></summary>
+        <p>Er ontbreekt waarschijnlijk een onderdeel genaamd
+          <em>Ghostscript</em>. Voer
+          <code>installer\install_dependencies.ps1</code> opnieuw uit, of
+          download Ghostscript handmatig vanaf
+          <a href="https://www.ghostscript.com/releases/gsdnld.html"
+             target="_blank">ghostscript.com</a> (kies de 64-bit Windows
+          versie).</p>
+      </details>
+
+      <details>
+        <summary><strong>De app start niet meer</strong></summary>
+        <ol class="steps">
+          <li>Sluit Windows even af en herstart de computer.</li>
+          <li>Probeer opnieuw op <code>BoekScanner.exe</code> te klikken.</li>
+          <li>Werkt het nog steeds niet? Stuur de map
+            <code>data/</code> niet weg — daar staan al uw boeken in!
+            Bel iemand die u helpt om de installatie te herhalen.</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- ==================== Wat doet de app ==================== -->
+    <section id="h-uitleg">
+      <h1>🤔 Wat doet deze app eigenlijk?</h1>
+      <p>Voor de nieuwsgierigen: BoekScanner doet drie dingen achter elkaar
+        voor elke pagina die u scant:</p>
+      <ol class="steps">
+        <li><strong>Bewerking</strong>: de scan wordt automatisch
+          rechtgezet, witruimte er omheen weggesneden, en het contrast
+          aangepast als het papier vergeeld is.</li>
+        <li><strong>Tekstherkenning (OCR)</strong>: een programma
+          genaamd <em>Tesseract</em> kijkt naar de pagina en probeert te
+          lezen wat er staat. Het herkent Nederlands, Engels, Duits en
+          Frans tegelijk.</li>
+        <li><strong>Opslaan</strong>: de pagina én de herkende tekst
+          worden samen opgeslagen in een mapje per boek. Pas wanneer u
+          op <em>Maak handouts</em> klikt, worden er PDF/Word-bestanden
+          gemaakt.</li>
+      </ol>
+      <p>Alles blijft <strong>op uw eigen computer</strong>. Niets wordt
+        naar internet verstuurd.</p>
+    </section>
+
+    <p class="back-to-top">
+      <a href="#h-welkom">⬆ Terug naar boven</a>
+    </p>
+
+  </article>
+</div>

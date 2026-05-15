@@ -1,0 +1,41 @@
+# Web framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+jinja2>=3.1.0
+python-multipart>=0.0.12
+
+# Desktop wrapper
+pywebview>=5.3.0
+
+# Image processing
+opencv-python>=4.10.0
+numpy>=2.0.0
+Pillow>=11.0.0
+scikit-image>=0.24.0
+
+# OCR
+pytesseract>=0.3.13
+ocrmypdf>=16.5.0
+pymupdf>=1.24.0  # PDF -> image rendering (geen externe Poppler nodig)
+
+# Document generation
+python-docx>=1.1.2
+reportlab>=4.2.0
+pypdf>=5.1.0
+
+# Spellcheck (Nederlands en meer)
+language-tool-python>=2.8.1
+
+# File-watcher
+watchdog>=6.0.0
+
+# Utilities
+pydantic>=2.9.0
+pydantic-settings>=2.6.0
+python-slugify>=8.0.4
+loguru>=0.7.2
+
+# Development & packaging
+pyinstaller>=6.11.0; platform_system == "Windows"
+pytest>=8.3.0
+httpx>=0.27.0

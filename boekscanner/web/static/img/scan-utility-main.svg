@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" font-family="Segoe UI, Arial, sans-serif">
+  <title>IJ Scan Utility - hoofdvenster</title>
+  <desc>Hoofdvenster van Canon IJ Scan Utility, met de Document-knop omcirkeld.</desc>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M 0,0 L 6,3 L 0,6 Z" fill="#d4380d"/>
+    </marker>
+    <!-- Generic round icon background -->
+    <symbol id="iconbg" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="22" fill="#e6f0ff" stroke="#0078d4"/>
+    </symbol>
+  </defs>
+
+  <!-- Window shadow -->
+  <rect x="20" y="20" width="680" height="420" rx="6" fill="#000" opacity="0.12"/>
+  <!-- Window -->
+  <rect x="16" y="16" width="680" height="420" rx="6" fill="#f3f3f3" stroke="#9aa0a6" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect x="16" y="16" width="680" height="32" rx="6" fill="#0078d4"/>
+  <rect x="16" y="40" width="680" height="8" fill="#0078d4"/>
+  <text x="36" y="37" font-size="14" fill="#fff" font-weight="600">Canon IJ Scan Utility</text>
+
+  <!-- Window controls -->
+  <text x="630" y="37" font-size="14" fill="#fff">_</text>
+  <rect x="650" y="26" width="14" height="12" fill="none" stroke="#fff" stroke-width="1.5"/>
+  <line x1="666" y1="26" x2="678" y2="38" stroke="#fff" stroke-width="2"/>
+  <line x1="678" y1="26" x2="666" y2="38" stroke="#fff" stroke-width="2"/>
+
+  <!-- Product name area -->
+  <rect x="36" y="64" width="648" height="38" fill="#fff" stroke="#d0d7de"/>
+  <text x="48" y="89" font-size="13" fill="#444">Product Name:</text>
+  <text x="148" y="89" font-size="13" font-weight="600" fill="#111">Canon TS5100 series</text>
+  <rect x="600" y="72" width="78" height="22" fill="#f3f3f3" stroke="#a8a8a8"/>
+  <text x="615" y="88" font-size="12" fill="#222">Settings</text>
+
+  <!-- Big button row: Auto, Document (highlighted), Photo, Custom, ScanGear, Stitch -->
+
+  <!-- Auto -->
+  <rect x="36"  y="120" width="100" height="120" fill="#fff" stroke="#a8a8a8"/>
+  <use href="#iconbg" x="64" y="138" width="44" height="44"/>
+  <!-- gear icon: simple cog using circle + small rectangles -->
+  <g transform="translate(86,160)">
+    <circle r="10" fill="none" stroke="#0078d4" stroke-width="2"/>
+    <circle r="3" fill="#0078d4"/>
+    <g fill="#0078d4">
+      <rect x="-2" y="-15" width="4" height="6"/>
+      <rect x="-2" y="9" width="4" height="6"/>
+      <rect x="-15" y="-2" width="6" height="4"/>
+      <rect x="9" y="-2" width="6" height="4"/>
+    </g>
+  </g>
+  <text x="86" y="210" text-anchor="middle" font-weight="700" font-size="13">Auto</text>
+  <text x="86" y="226" text-anchor="middle" font-size="11" fill="#666">Automatisch</text>
+
+  <!-- Document - HIGHLIGHTED -->
+  <rect x="146" y="120" width="100" height="120" fill="#fffbe6" stroke="#d4380d" stroke-width="3"/>
+  <circle cx="196" cy="160" r="22" fill="#fff5d4" stroke="#d4380d" stroke-width="2"/>
+  <!-- document icon: page with corner fold -->
+  <g transform="translate(196,160)">
+    <path d="M -10,-12 L 6,-12 L 12,-6 L 12,12 L -10,12 Z" fill="#fff" stroke="#d4380d" stroke-width="1.6"/>
+    <path d="M 6,-12 L 6,-6 L 12,-6" fill="none" stroke="#d4380d" stroke-width="1.4"/>
+    <line x1="-6" y1="-2" x2="8" y2="-2" stroke="#d4380d" stroke-width="1.2"/>
+    <line x1="-6" y1="3" x2="8" y2="3" stroke="#d4380d" stroke-width="1.2"/>
+    <line x1="-6" y1="8" x2="4" y2="8" stroke="#d4380d" stroke-width="1.2"/>
+  </g>
+  <text x="196" y="210" text-anchor="middle" font-weight="700" font-size="13" fill="#d4380d">Document</text>
+  <text x="196" y="226" text-anchor="middle" font-size="11" fill="#666">Voor tekst</text>
+
+  <!-- Photo -->
+  <rect x="256" y="120" width="100" height="120" fill="#fff" stroke="#a8a8a8"/>
+  <use href="#iconbg" x="284" y="138" width="44" height="44"/>
+  <g transform="translate(306,160)">
+    <rect x="-12" y="-9" width="24" height="18" fill="#fff" stroke="#0078d4" stroke-width="1.4"/>
+    <circle cx="-5" cy="-3" r="2.5" fill="#0078d4"/>
+    <path d="M -10,7 L -3,0 L 3,4 L 7,-1 L 12,7" fill="none" stroke="#0078d4" stroke-width="1.4"/>
+  </g>
+  <text x="306" y="210" text-anchor="middle" font-weight="700" font-size="13">Photo</text>
+  <text x="306" y="226" text-anchor="middle" font-size="11" fill="#666">Voor foto's</text>
+
+  <!-- Custom -->
+  <rect x="366" y="120" width="100" height="120" fill="#fff" stroke="#a8a8a8"/>
+  <use href="#iconbg" x="394" y="138" width="44" height="44"/>
+  <g transform="translate(416,160)" stroke="#0078d4" stroke-width="3" stroke-linecap="round">
+    <line x1="-10" y1="0" x2="10" y2="0"/>
+    <line x1="0" y1="-10" x2="0" y2="10"/>
+  </g>
+  <text x="416" y="210" text-anchor="middle" font-weight="700" font-size="13">Custom</text>
+
+  <!-- ScanGear -->
+  <rect x="476" y="120" width="100" height="120" fill="#fff" stroke="#a8a8a8"/>
+  <use href="#iconbg" x="504" y="138" width="44" height="44"/>
+  <g transform="translate(526,160)" fill="#0078d4">
+    <rect x="-10" y="-2" width="14" height="4" transform="rotate(-30)"/>
+    <rect x="-4" y="-10" width="4" height="14" transform="rotate(-30)"/>
+    <rect x="-2" y="-2" width="4" height="14" transform="rotate(30)"/>
+  </g>
+  <text x="526" y="210" text-anchor="middle" font-weight="700" font-size="13">ScanGear</text>
+
+  <!-- Stitch -->
+  <rect x="586" y="120" width="98" height="120" fill="#fff" stroke="#a8a8a8"/>
+  <use href="#iconbg" x="613" y="138" width="44" height="44"/>
+  <g transform="translate(635,160)" fill="none" stroke="#0078d4" stroke-width="1.6">
+    <rect x="-12" y="-12" width="10" height="10"/>
+    <rect x="2" y="-12" width="10" height="10"/>
+    <rect x="-12" y="2" width="10" height="10"/>
+    <rect x="2" y="2" width="10" height="10"/>
+  </g>
+  <text x="635" y="210" text-anchor="middle" font-weight="700" font-size="13">Stitch</text>
+
+  <!-- Footer -->
+  <rect x="36" y="270" width="648" height="100" fill="#fff" stroke="#d0d7de"/>
+  <text x="48" y="294" font-size="12" fill="#666">Wanneer u op een knop klikt, wordt de scan gemaakt en opgeslagen</text>
+  <text x="48" y="312" font-size="12" fill="#666">in de map die u bij Settings... heeft gekozen.</text>
+
+  <!-- Annotation arrow + label -->
+  <path d="M 196 405 L 196 250" stroke="#d4380d" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="60" y="400" width="380" height="32" rx="6" fill="#d4380d"/>
+  <text x="250" y="421" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">
+    Klik hier om een pagina te scannen
+  </text>
+</svg>
