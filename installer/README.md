@@ -1,5 +1,33 @@
 # Installer
 
+## BoekScanner-Setup.exe
+
+De aanbevolen distributie voor eindgebruikers is de installer uit GitHub
+Releases: `BoekScanner-Setup.exe`.
+
+De installer:
+
+1. installeert BoekScanner in de gebruikersmap (`%LOCALAPPDATA%\Programs\BoekScanner`);
+2. maakt een Startmenu-snelkoppeling;
+3. kan optioneel een bureaubladsnelkoppeling maken;
+4. start BoekScanner direct na installatie.
+
+Build lokaal:
+
+```powershell
+# Eerst de app bouwen
+.\installer\build.ps1 -SkipVenv
+
+# Daarna, als Inno Setup is geinstalleerd:
+iscc .\installer\BoekScanner.iss
+```
+
+Resultaat: `installer\output\BoekScanner-Setup.exe`.
+
+Let op: zonder code-signing certificaat kan Windows SmartScreen nog steeds een
+waarschuwing tonen. Een installer maakt installatie eenvoudiger, maar lost
+reputatie/signing niet volledig op.
+
 ## install_dependencies.ps1
 
 PowerShell-script dat de externe binaries installeert die BoekScanner

@@ -40,9 +40,10 @@ Eindgebruikers krijgen één `.exe`-bestand. Dubbelklikken en gaan.
 
 ## Installatie (eindgebruiker)
 
-1. Download `BoekScanner-windows.zip` uit de GitHub Releases-pagina.
-2. Pak de zip uit naar bijvoorbeeld `C:\BoekScanner`.
-3. Start `BoekScanner.exe`. De installer regelt automatisch:
+1. Download `BoekScanner-Setup.exe` uit de GitHub Releases-pagina.
+2. Dubbelklik op `BoekScanner-Setup.exe`.
+3. Volg de stappen op het scherm. De installer zet BoekScanner in uw gebruikersmap en maakt een Startmenu-snelkoppeling.
+4. Start `BoekScanner` vanuit het Startmenu. De app regelt daarna:
    - Tesseract OCR met Nederlandse, Engelse, Duitse en Franse
      taalbestanden
    - Ghostscript (nodig voor doorzoekbare PDF's)
@@ -51,8 +52,8 @@ Eindgebruikers krijgen één `.exe`-bestand. Dubbelklikken en gaan.
 ## Updates voor eindgebruikers
 
 BoekScanner heeft een **Update**-knop rechtsboven. Die controleert de nieuwste
-GitHub Release en downloadt `BoekScanner-windows.zip`. Daarna sluit de app
-zichzelf, vervangt alleen de appbestanden, en start opnieuw.
+GitHub Release en downloadt `BoekScanner-windows.zip` voor de interne app-update.
+Daarna sluit de app zichzelf, vervangt alleen de appbestanden, en start opnieuw.
 
 Belangrijk: de map `data/` en `config.json` worden niet vervangen. Gescande
 boeken en lokale instellingen blijven dus staan.
@@ -77,9 +78,11 @@ Die workflow:
 1. bouwt de Windows-app met PyInstaller;
 2. zet een unieke build-id in `boekscanner/build_info.py`;
 3. maakt `BoekScanner-windows.zip`;
-4. publiceert die zip als nieuwste GitHub Release.
+4. maakt daarnaast `BoekScanner-Setup.exe` met Inno Setup;
+5. publiceert de zip en installer als nieuwste GitHub Release.
 
-De gebruiker hoeft daarna alleen in BoekScanner op **Update** te klikken.
+Nieuwe gebruikers downloaden de installer. Bestaande gebruikers hoeven daarna
+alleen in BoekScanner op **Update** te klikken.
 
 ## Voor ontwikkelaars
 

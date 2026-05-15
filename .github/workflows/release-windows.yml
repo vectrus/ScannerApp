@@ -51,6 +51,16 @@ jobs:
         run: |
           python -m PyInstaller --noconfirm installer/BoekScanner.spec
 
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          choco install innosetup --yes --no-progress
+
+      - name: Build installer
+        shell: pwsh
+        run: |
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" installer\BoekScanner.iss
+
       - name: Package zip
         shell: pwsh
         run: |
@@ -65,5 +75,7 @@ jobs:
             Automatische BoekScanner build vanaf `main`.
 
             Commit: `${{ github.sha }}`
-          files: BoekScanner-windows.zip
+          files: |
+            BoekScanner-windows.zip
+            installer/output/BoekScanner-Setup.exe
           make_latest: true
