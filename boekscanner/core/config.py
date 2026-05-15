@@ -86,8 +86,8 @@ class UiCfg(BaseModel):
 
 class UpdatesCfg(BaseModel):
     enabled: bool = True
-    github_owner: str = ""
-    github_repo: str = ""
+    github_owner: str = "vectrus"
+    github_repo: str = "ScannerApp"
     asset_name: str = "BoekScanner-windows.zip"
 
 

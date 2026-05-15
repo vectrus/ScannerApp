@@ -42,10 +42,10 @@
   },
 
   "updates": {
-    "_comment": "Vul github_owner/repo in zodra de publieke GitHub-repo bestaat. De app gebruikt de nieuwste Release-asset BoekScanner-windows.zip.",
+    "_comment": "De app gebruikt de nieuwste Release-asset BoekScanner-windows.zip.",
     "enabled": true,
-    "github_owner": "JOUW_GITHUB_NAAM",
-    "github_repo": "BoekScanner",
+    "github_owner": "vectrus",
+    "github_repo": "ScannerApp",
     "asset_name": "BoekScanner-windows.zip"
   }
 }
