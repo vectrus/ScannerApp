@@ -48,7 +48,7 @@ for pkg in ("pytesseract", "ocrmypdf", "ocrmypdf.builtin_plugins", "pikepdf", "p
 block_cipher = None
 
 a = Analysis(
-    [str(ROOT / "boekscanner" / "main.py")],
+    [str(ROOT / "run.py")],
     pathex=[str(ROOT)],
     binaries=[],
     datas=datas,
