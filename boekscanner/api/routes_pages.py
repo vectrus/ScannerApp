@@ -51,6 +51,7 @@ def _page_to_out(meta: ProjectMeta, page_id: str) -> PageOut:
                 has_ocr=bool(p.ocr_filename),
                 text_preview=p.text_preview,
                 avg_confidence=p.avg_confidence,
+                rotation_degrees=p.rotation_degrees,
                 created_at=p.created_at,
             )
     raise HTTPException(status_code=404, detail="Pagina niet gevonden.")
@@ -146,12 +147,19 @@ def reprocess_page(page_id: str, payload: ReprocessIn):
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
 
+    if payload.rotation_degrees is not None:
+        if payload.rotation_degrees % 90 != 0:
+            raise HTTPException(status_code=400, detail="Rotatie moet 0, 90, 180 of 270 graden zijn.")
+        page.rotation_degrees = payload.rotation_degrees % 360
+
     base = project.meta.settings.to_processing_options()
     overrides = ip.ProcessingOptions(
         deskew=payload.deskew if payload.deskew is not None else base.deskew,
         crop=payload.crop if payload.crop is not None else base.crop,
         enhance=payload.enhance if payload.enhance is not None else base.enhance,
         split_pages=payload.split_pages if payload.split_pages is not None else base.split_pages,
+        force_split=payload.force_split,
+        rotation_degrees=page.rotation_degrees,
     )
     result = process_new_page(project, page, run_ocr=payload.rerun_ocr, overrides=overrides)
     return [_page_to_out(project.meta, p.id) for p in result.new_pages]

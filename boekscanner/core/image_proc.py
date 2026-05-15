@@ -49,6 +49,25 @@ def save_image(img: np.ndarray, path: Path, quality: int = 92) -> None:
     buf.tofile(str(path))
 
 
+def rotate_image(img: np.ndarray, degrees: int) -> np.ndarray:
+    """Roteer een scan in stappen van 90 graden.
+
+    ``degrees`` mag positief of negatief zijn; waarden worden genormaliseerd
+    naar 0/90/180/270. Dit gebeurt bewust voor OCR, zodat tekst eerst rechtop
+    staat voordat Tesseract gaat lezen.
+    """
+    normalized = degrees % 360
+    if normalized == 0:
+        return img
+    if normalized == 90:
+        return cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+    if normalized == 180:
+        return cv2.rotate(img, cv2.ROTATE_180)
+    if normalized == 270:
+        return cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    raise ValueError("Rotatie moet een veelvoud van 90 graden zijn.")
+
+
 # --- Deskew (rechtzetten) --------------------------------------------------
 
 
@@ -169,7 +188,11 @@ def enhance_old_paper(img: np.ndarray) -> np.ndarray:
 # --- Two-page splitter -----------------------------------------------------
 
 
-def split_two_pages(img: np.ndarray, gutter_search_pct: float = 0.2) -> List[np.ndarray]:
+def split_two_pages(
+    img: np.ndarray,
+    gutter_search_pct: float = 0.2,
+    force_center: bool = False,
+) -> List[np.ndarray]:
     """Splits een scan van een opengeslagen boek in linker- en rechterpagina.
 
     Zoekt de 'gutter' (donkere bandkloof in het midden) door de gemiddelde
@@ -199,8 +222,12 @@ def split_two_pages(img: np.ndarray, gutter_search_pct: float = 0.2) -> List[np.
     paper_avg = column_mean.mean()
     gutter_val = column_mean[gutter]
     if gutter_val > paper_avg * 0.85:
-        logger.debug("Geen duidelijke gutter gevonden — geen split.")
-        return [img]
+        if force_center:
+            logger.debug("Geen duidelijke gutter gevonden - forceer midden-split.")
+            gutter = mid
+        else:
+            logger.debug("Geen duidelijke gutter gevonden - geen split.")
+            return [img]
 
     left = img[:, :gutter]
     right = img[:, gutter:]
@@ -219,12 +246,16 @@ class ProcessingOptions:
     crop: bool = True
     enhance: bool = True
     split_pages: bool = False
+    force_split: bool = False
+    rotation_degrees: int = 0
 
 
 def process_page(img: np.ndarray, options: ProcessingOptions) -> List[np.ndarray]:
     """Volledige pipeline. Geeft 1 (of 2 bij split) verwerkte afbeelding(en)."""
+    if options.rotation_degrees:
+        img = rotate_image(img, options.rotation_degrees)
     if options.split_pages:
-        pieces = split_two_pages(img)
+        pieces = split_two_pages(img, force_center=options.force_split)
     else:
         pieces = [img]
 

@@ -34,6 +34,7 @@ class PageOut(BaseModel):
     has_ocr: bool
     text_preview: Optional[str]
     avg_confidence: Optional[float]
+    rotation_degrees: int = 0
     created_at: str
 
 
@@ -63,6 +64,8 @@ class ReprocessIn(BaseModel):
     crop: Optional[bool] = None
     enhance: Optional[bool] = None
     split_pages: Optional[bool] = None
+    force_split: bool = False
+    rotation_degrees: Optional[int] = None
     rerun_ocr: bool = True
 
 

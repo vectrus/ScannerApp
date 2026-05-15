@@ -113,6 +113,9 @@ const els = {
   editorContent: $("editorContent"),
   pageImage: $("pageImage"),
   pageTitle: $("pageTitle"),
+  rotateLeftBtn: $("rotateLeftBtn"),
+  rotateRightBtn: $("rotateRightBtn"),
+  splitPageBtn: $("splitPageBtn"),
   reprocessBtn: $("reprocessBtn"),
   deletePageBtn: $("deletePageBtn"),
   ocrText: $("ocrText"),
@@ -432,23 +435,77 @@ els.checkSpellingBtn.addEventListener("click", async () => {
   }
 });
 
-// --- Reprocess / verwijder ---------------------------------
+// --- Roteren / splitsen / reprocess / verwijder -------------
 
-els.reprocessBtn.addEventListener("click", async () => {
+async function reprocessCurrentPage(payload, successMessage, button = els.reprocessBtn, busyLabel = "⏳ Bezig…") {
   if (!state.activePageId) return;
+  const original = button.innerHTML;
   try {
-    els.reprocessBtn.disabled = true;
-    els.reprocessBtn.textContent = "⏳ Bezig…";
-    await api.post(`/api/pages/${state.activePageId}/reprocess`, { rerun_ocr: true });
+    button.disabled = true;
+    button.textContent = busyLabel;
+    const result = await api.post(`/api/pages/${state.activePageId}/reprocess`, payload);
     state.pageCache.delete(state.activePageId);
+    if (result.length > 0 && payload.split_pages) {
+      state.activePageId = result[0].id;
+    }
     await loadActiveProject();
-    toast("Pagina opnieuw verwerkt", "success");
+    toast(successMessage, "success");
   } catch (err) {
     toast("Verwerken mislukt: " + err.message, "error");
   } finally {
-    els.reprocessBtn.disabled = false;
-    els.reprocessBtn.innerHTML = "🔄 Opnieuw verwerken";
+    button.disabled = false;
+    button.innerHTML = original;
   }
+}
+
+function currentPage() {
+  if (!state.active || !state.activePageId) return null;
+  return state.active.pages.find(p => p.id === state.activePageId) || null;
+}
+
+els.rotateLeftBtn.addEventListener("click", async () => {
+  const page = currentPage();
+  if (!page) return;
+  const nextRotation = ((page.rotation_degrees || 0) + 270) % 360;
+  await reprocessCurrentPage(
+    { rotation_degrees: nextRotation, rerun_ocr: true },
+    "Pagina linksom gedraaid en OCR opnieuw uitgevoerd",
+    els.rotateLeftBtn,
+    "⏳ Draaien…",
+  );
+});
+
+els.rotateRightBtn.addEventListener("click", async () => {
+  const page = currentPage();
+  if (!page) return;
+  const nextRotation = ((page.rotation_degrees || 0) + 90) % 360;
+  await reprocessCurrentPage(
+    { rotation_degrees: nextRotation, rerun_ocr: true },
+    "Pagina rechtsom gedraaid en OCR opnieuw uitgevoerd",
+    els.rotateRightBtn,
+    "⏳ Draaien…",
+  );
+});
+
+els.splitPageBtn.addEventListener("click", async () => {
+  if (!state.activePageId) return;
+  if (!confirm("Deze scan handmatig in een linker- en rechterpagina splitsen?")) return;
+  await reprocessCurrentPage(
+    { split_pages: true, force_split: true, rerun_ocr: true },
+    "Scan gesplitst in twee pagina's",
+    els.splitPageBtn,
+    "⏳ Splitsen…",
+  );
+});
+
+els.reprocessBtn.addEventListener("click", async () => {
+  if (!state.activePageId) return;
+  await reprocessCurrentPage(
+    { rerun_ocr: true },
+    "Pagina opnieuw verwerkt",
+    els.reprocessBtn,
+    "⏳ Bezig…",
+  );
 });
 
 els.deletePageBtn.addEventListener("click", async () => {

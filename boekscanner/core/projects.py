@@ -55,6 +55,7 @@ class PageMeta(BaseModel):
     avg_confidence: Optional[float] = None
     width: Optional[int] = None
     height: Optional[int] = None
+    rotation_degrees: int = 0
     created_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
 
 

@@ -110,7 +110,9 @@ def process_new_page(
         project.meta.pages.pop(original_index)
         for offset, piece in enumerate(processed_pieces):
             piece_id = uuid.uuid4().hex[:12]
-            piece_meta = PageMeta(id=piece_id, raw_filename=page.raw_filename)
+            piece_raw_name = f"{piece_id}.png"
+            ip.save_image(piece, project.raw_dir / piece_raw_name)
+            piece_meta = PageMeta(id=piece_id, raw_filename=piece_raw_name)
             project.meta.pages.insert(original_index + offset, piece_meta)
             new_pages.append(_finalize_piece(project, piece_meta, piece, run_ocr))
         project.save()
