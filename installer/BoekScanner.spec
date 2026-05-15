@@ -15,7 +15,7 @@ from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 ONE_FILE = False  # one-folder is sneller op te starten en makkelijker te debuggen
 
-ROOT = Path(SPECPATH).resolve().parent.parent  # installer/ -> project-root
+ROOT = Path(SPECPATH).resolve().parent  # installer/ -> project-root
 
 # Bundle de complete web/ map (HTML/CSS/JS) en de installer/-map
 datas = [
